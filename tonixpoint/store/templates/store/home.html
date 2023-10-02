@@ -1,0 +1,280 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+
+{% block banner-slider %}
+<br><br>
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'store/images/banner/WORLD-TONIX-CORECT-01.png' %}" class="d-block w-100" 
+        alt="Banner image">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'store/images/banner/WORLD-TONIX-CORECT-01.png' %}" class="d-block w-100" 
+        alt="Banner image">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'store/images/banner/WORLD-TONIX-CORECT-01.png' %}" class="d-block w-100" 
+        alt="Banner image">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'store/images/banner/WORLD-TONIX-CORECT-01.png' %}" class="d-block w-100" 
+        alt="Banner image">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+{% endblock banner-slider %}
+
+{% block information %}
+<br><br>
+<div class="container">
+  <div class="row text-center p-5 border-bottom shadow"><br>
+    <h1 class="text-primary">TONIXPOINT</h1>
+    <h6 class="text-primary">HOME OF TECHNOLOGY</h6>
+    <hr>
+    <small class="fs-5">
+      Dealers in Home Automation, Mechanical works, Software & Hardware designing and Implementation.
+    </small>
+  </div>
+</div>
+{% endblock information %}
+
+{% block main-content %}
+<br><br>
+<div class="container">
+  <h1 class="text-center text-primary">Products</h1>
+  <hr><br>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for prod in product %}   
+    <a href="{% url 'product-detail' prod.id %}" class="text-decoration-none">
+      <div class="col">
+        <div class="card h-100 shadow">
+          <img src="{{prod.product_image.url}}" class="card-img-top" height="300px" alt="{{prod.title}} IMAGE" />
+          <div class="card-body">
+            <h5 class="card-title">{{prod.title}}</h5>
+            <p class="card-text">
+                {{prod.subtitle}}
+            </p>
+            <p class="fw-bold">
+              <small class="fw-light text-decoration-line-through">TZS. {{prod.selling_price}}</small><br>
+              TZS. {{prod.discount_price}}/=
+            </p>
+          </div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <br><br>
+  {% comment %} <div class="row container">
+    <div class="col-md-4 col-sm-4 mi-go wow fadeInUp" data-wow-duratioin="ls" data-wow-delay="0.6s"
+      style="animation-duration: 1s; animation-delay: 0.6s; animation-name: none;">
+      <div class="goodnesssec buttermilk smbg">
+        <a href="{% url 'category' 'AT' %}">
+          <div class="goodnessseccont text-center">
+            <img src="{% static 'app/images/product/SPRAY GUN.jpeg' %}" alt="{{product.title}} IMAGE"
+              class="img-responsive">
+            <p class="mlkpro">SPRAY GUN</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-4 mi-go wow fadeInUp" data-wow-duratioin="ls" data-wow-delay="0.6s"
+      style="animation-duration: 1s; animation-delay: 0.6s; animation-name: none;">
+      <div class="goodnesssec buttermilk curdbgpro">
+        <a href="{% url 'category' 'BT' %}">
+          <div class="goodnessseccont text-center">
+            <img src="{% static 'app/images/product/MITER SAW.jpg' %}" alt="{{product.title}} IMAGE"
+              class="img-responsive">
+            <p class="mlkpro">MITER SAW</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-4 mi-go wow fadeInUp" data-wow-duratioin="ls" data-wow-delay="0.6s"
+      style="animation-duration: 1s; animation-delay: 0.6s; animation-name: none;">
+      <div class="goodnesssec buttermilk buttermilk">
+        <a href="{% url 'category' 'PT' %}">
+          <div class="goodnessseccont text-center">
+            <img src="{% static 'app/images/product/21V BRUSHLESS WRENCH.jpg' %}" alt="{{product.title}} IMAGE"
+              class="img-responsive">
+            <p class="mlkpro">21V BRUSHLESS WRENCH</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div> {% endcomment %}
+</div>
+
+
+<br><br>
+
+<div class="container">
+  <h1 class="text-center text-primary">What We Do</h1>
+  <hr><br>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% comment %} <a href="#" class="text-decoration-none"> {% endcomment %}
+      <div class="col">
+        <div class="card h-100 shadow">
+          <img src="{% static 'store/images/services/Welding-engineer.jpg' %}" height="300px" class="card-img-top" alt="" />
+          <div class="card-body">
+            <h5 class="card-title">Welding & Mechanical works</h5>
+            <p class="card-text" max="50">
+              Our skilled team of professionals specilizes in providing expert welding services for all your home
+              technology. We ensure precise and highy-quality welding techniques to deliver durable and long-lasting
+              results.
+            </p>
+            <p class="card-text">
+              Our Company offers a wide range of mechanical works services. Our team of skilled technicians and
+              engineers are equiped to handle various mechanical tasks, from installations and repairs to Maintenance
+              and troubleshooting.
+            </p>
+          </div>
+        </div>
+      </div>
+      {% comment %}
+    </a> {% endcomment %}
+    {% comment %} <a href="#" class="text-decoration-none"> {% endcomment %}
+      <div class="col">
+        <div class="card h-100 shadow">
+          <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp" height="300px" class="card-img-top" alt="" />
+          <div class="card-body">
+            <h5 class="card-title">Maintenance & repair</h5>
+            <p class="card-text">Our dedicated Maintenance team is committed to ensuring the optimal performance and
+              longerity of your home technology systems.</p>
+          </div>
+        </div>
+      </div>
+      {% comment %}
+    </a> {% endcomment %}
+    {% comment %} <a href="#" class="text-decoration-none"> {% endcomment %}
+      <div class="col">
+        <div class="card h-100 shadow">
+          <img src="{% static 'store/images/services/Smart-Home-Automation.jpg' %}" height="300px" class="card-img-top" alt="" />
+          <div class="card-body">
+            <h5 class="card-title">Electric fense, Security systems & Electrical Installation</h5>
+            <p class="card-text">Our comprehensive home technology services also include professional electric fence
+              installation. Safeguard your property and loved ones with our state-of-the-art electric fence systems.</p>
+            <p class="card-text">Our company offers comprehensive security system services to ensure the safety and
+              protection of your home or business.We understand the importance of safeguarding your premises and
+              valuable assets, which is why we provide a range of cutting-edge security solutions tailored to your
+              specific needs.</p>
+            <p class="card-text">Our comprehensive home technology services include expert electrical installation to
+              meet all your residential electrical needs. Our skilled and licensed electricians are experienced in
+              providing safe and reliable electrical solutions. </p>
+          </div>
+        </div>
+      </div>
+      {% comment %}
+    </a> {% endcomment %}
+    {% comment %} <a href="#" class="text-decoration-none"> {% endcomment %}
+      <div class="col">
+        <div class="card h-100 shadow">
+          <img src="{% static 'store/images/services/modern-website-design.jpg' %}" height="300px" class="card-img-top" alt="" />
+          <div class="card-body">
+            <h5 class="card-title">Website Design</h5>
+            <p class="card-text">Our comprehensive home technology services also include professional electric fence
+              installation. Safeguard your property and loved ones with our state-of-the-art electric fence systems.</p>
+          </div>
+        </div>
+      </div>
+      {% comment %}
+    </a> {% endcomment %}
+    {% comment %} <a href="#" class="text-decoration-none"> {% endcomment %}
+      <div class="col">
+        <div class="card h-100 shadow">
+          <img src="{% static 'store/images/services/modern-website-design.jpg' %}" height="300px" class="card-img-top" alt="" />
+          <div class="card-body">
+            <h5 class="card-title">Home Automation & Mobile aplliances</h5>
+            <p class="card-text">Our innovative home technology solutions include state-of-the-art home automation
+              services. Experience the convenience and efficiency of controlling various aspects of
+              your home with a single touch. </p>
+            <p class="card-text">For all your mobile appliance needs, our company offers a range of services to ensure
+              optimal performance and functionality. Our skilled technicians specialize in mobile appliance repair,
+              maintenance, and customization. Whether you have a TY, smartphone, tablet, or other mobile devices, we
+              have the expertise to address a wide array of issues, including hardware repairs, software updates, and
+              battery replacements.</p>
+          </div>
+        </div>
+      </div>
+      {% comment %}
+    </a> {% endcomment %}
+    {% comment %} <a href="#" class="text-decoration-none"> {% endcomment %}
+      <div class="col">
+        <div class="card h-100 shadow">
+          <img src="{% static 'store/images/services/Welding-engineer.jpg' %}" height="300px" class="card-img-top" alt="" />
+          <div class="card-body">
+            <h5 class="card-title">Embedded systems
+            </h5>
+            <p class="card-text">
+              Our experienced team specializes in embedded system design and development, catering to diverse industries
+              and applications. From conceptualization to prototyping and deployment, we provide
+              end-to-end solutions tailored to your specific requirements.</p>
+          </div>
+        </div>
+      </div>
+      {% comment %}
+    </a> {% endcomment %}
+    {% comment %} <a href="#" class="text-decoration-none"> {% endcomment %}
+      <div class="col">
+        <div class="card h-100 shadow">
+          <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp" height="300px" class="card-img-top" alt="" />
+          <div class="card-body">
+            <h5 class="card-title">CNG Engraving &
+              JD printing</h5>
+            <p class="card-text">We offer high-quality engraving solutions for a wide range of materials, including
+              metals, plastics, and wood.We leverage the latest 3D printing technologies and materials to deliver
+              high-quality, precision-engineered parts and prototypes.</p>
+          </div>
+        </div>
+      </div>
+      {% comment %}
+    </a> {% endcomment %}
+    {% comment %} <a href="#" class="text-decoration-none"> {% endcomment %}
+      <div class="col">
+        <div class="card h-100 shadow">
+          <img src="{% static 'store/images/services/Welding-engineer.jpg' %}" height="300px" class="card-img-top" alt="" />
+          <div class="card-body">
+            <h5 class="card-title">Power tools
+            </h5>
+            <p class="card-text">Our comprehensive home technology services include a wide range of power tools to
+              support your DIY projects and home improvement needs.We provide high-quality power tools from trusted
+              brands that deliver superior performance and reliability.</p>
+          </div>
+        </div>
+      </div>
+      {% comment %}
+    </a> {% endcomment %}
+    {% comment %} <a href="#" class="text-decoration-none"> {% endcomment %}
+      <div class="col">
+        <div class="card h-100 shadow">
+          <img src="{% static 'store/images/services/Welding-engineer.jpg' %}" height="300px" class="card-img-top" alt="" />
+          <div class="card-body">
+            <h5 class="card-title">Electrical &
+              Electronic components
+            </h5>
+            <p class="card-text">Our expertise extends to providing comprehensive electronic component services for your
+              home technology needs. Whether you require repairs, replacements, or custom installations, our skilled
+              technicians have you covered.</p>
+          </div>
+        </div>
+      </div>
+      {% comment %}
+    </a> {% endcomment %}
+  </div>
+</div>
+<br><br>
+{% endblock main-content %}

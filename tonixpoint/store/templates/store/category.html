@@ -1,0 +1,60 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}Category{% endblock title %}
+
+{% block main-content %}
+<br><br>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-3 border-end">
+            <div class="list-group">
+                {% for val in title %}
+                <a href="{% url 'category-title' val.title %}" class="list-group-item list-group-item-action" aria-current="true">{{val.title}}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="row">
+                {% for prod in product %}
+                <div class="col-5 text-center mb-4">
+                    <a href="{% url 'product-detail' prod.id %}" class="text-decoration-none">
+                        <div class="card h-100 shadow">
+                            <img src="{{prod.product_image.url}}" class="card-img-top" height="300px" alt="{{prod.title}} IMAGE" />
+                            <div class="card-body">
+                              <h5 class="card-title">{{prod.title}}</h5>
+                              <p class="card-text">
+                                  {{prod.subtitle}}
+                              </p>
+                              <p class="fw-bold">
+                                <small class="fw-light text-decoration-line-through">TZS. {{prod.selling_price}}</small><br>
+                                TZS. {{prod.discount_price}}/=
+                              </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div><br><br>
+{% endblock main-content %}
+
+<a href="{% url 'product-detail' prod.id %}" class="text-decoration-none">
+    <div class="col">
+      <div class="card h-100">
+        <img src="{{prod.product_image.url}}" class="card-img-top" height="300px" alt="{{prod.title}} IMAGE" />
+        <div class="card-body">
+          <h5 class="card-title">{{prod.title}}</h5>
+          <p class="card-text">
+              {{prod.subtitle}}
+          </p>
+          <p class="fw-bold">
+            TZS.{{prod.discount_price}}/=
+            <small class="fw-light text-decoration-line-through">{{prod.selling_price}}</small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </a>
