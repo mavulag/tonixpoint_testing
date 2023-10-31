@@ -1,14 +1,35 @@
-# tonixpoint_testing
+# Tonix Point
+## Description
 TONIXPOINT HOME OF TECHNOLOGY Dealers in Home Automation, Mechanical Works, Software and Hardware Design and Implementation
 
-# About Us
-## Objectives
-Our goal is to be recognized for providing quality services, availability, and easy distribution of products for the development of technology.
+### Vision
+To be the leading company in the provision of quality and affordable services in the field of technology.
 
-## Vision
-To bring convenience and technological independence to Africa in terms of knowledge and requirements.
+### Mission
+To provide quality and affordable services in the field of technology.
 
-## Mission
-Providing quality services and easy access to quality equipment for engineers and stakeholders
+## Table of Contents
+- [Description](#description)
+- [Table of Contents](#table-of-contents)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
 
-Visit in: http://marvo.pythonanywhere.com/
+## Installation
+```bash
+git clone https://github.com/mavulag/tonixpoint_testing.git
+cp witchig.txt .env
+
+cd tonixpoint && pip3 install -r requirements.txt
+
+```
+## Usage
+```bash
+cd tonixpoint
+
+python3 manage.py migrate
+
+python3 manage.py runserver
+```
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

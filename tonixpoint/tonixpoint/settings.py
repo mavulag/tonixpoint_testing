@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-nnjv#%y9b)9_uj-gzjr4di&f=k%bwg+2fp&6)(q+)h0pg8419s'
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -130,6 +134,9 @@ LOGIN_REDIRECT_URL = '/profile/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-# Razorpay
-RAZOR_KEY_ID = "rzp_test_2TUHCJnGDCobwu"
-RAZOR_KEY_SECRET = "Hk6ay2FD9VpJGUljissFWLN"
+# Configs for AzamPay
+AZAMPAY_APP_NAME = str(os.getenv('AZAMPAY_APP_NAME', 'AzamPay'))
+AZAMPAY_CLIENT_ID = str(os.getenv('AZAMPAY_CLIENT_ID', 'AzamPay'))
+AZAMPAY_CLIENT_SECRET = str(os.getenv('AZAMPAY_CLIENT_SECRET', 'AzamPay'))
+AZAMPAY_ENVIRONMENT = str(os.getenv('AZAMPAY_ENVIRONMENT', 'sandbox'))
+AZAMPAY_TOKEN = str(os.getenv('AZAMPAY_TOKEN', 'AzamPay'))

@@ -11,6 +11,8 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
+from azampay_integration.services import AzamPayService
+
 # Create your views here.
 
 
@@ -248,27 +250,45 @@ class checkout(View):
             famount += value
         totalamount = famount + 10000
 
-        razoramount = int(totalamount * 100)
+        # AzamPay Integration
+        azampay_service = AzamPayService()
+        print(settings.AZAMPAY_APP_NAME, settings.AZAMPAY_CLIENT_ID, settings.AZAMPAY_CLIENT_SECRET)
+        return
 
-        client = razorpay.Client(
-            auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
-        data = {"amount": razoramount, "currency": "TZS",
-                "receipt": "order_rcptid_12"}
-        payment_response = client.order.create(data=data)
-        print(payment_response)
 
-        # {'id': 'order_KU0n5eKcEeiLOm', 'entity': 'order', 'amount': 14500, 'amount_paid': 0, 'amount_due': 14500, 'currency': 'TSh', 'receipt': 'order_rcptid_12', 'offer_id': None, 'status': 'created', 'attempts': 0, 'notes': [], 'created_at': 1665829122}
+        # Create a mobile checkout request
+        checkout_data = {
+            'accountNumber': '12345',
+            'amount': str(totalamount),  # Convert to string
+            'currency': 'TZS',
+            'externalId': 'invoice123',
+            'provider': 'Airtel'  # Replace with your desired provider
+        }
 
-        order_id = payment_response['id']
-        order_status = payment_response['status']
-        if order_status == 'created':
-            payment = Payment(
-                user=user,
-                amount=totalamount,
-                razorpay_order_id=order_id,
-                razorpay_payment_status=order_status)
-            payment.save()
-        return render(request, 'store/checkout.html', locals())
+        try:
+            azam_payment_response = azampay_service.mobile_checkout(checkout_data)
+            # Process azam_payment_response and handle any errors
+            if azam_payment_response is not None:
+                # If successful, you can access transaction information
+                transaction_id = azam_payment_response.get('transactionId')
+                message = azam_payment_response.get('message')
+                # Handle success
+                
+                order_status = azam_payment_response.get('status')
+
+                if order_status:
+                    payment = Payment(
+                        user=user,
+                        amount=totalamount,
+                        )
+                    payment.save()
+                return render(request, 'store/checkout.html', locals())
+
+            else:
+                # Handle error
+                pass
+        except Exception as e:
+            print(e)
 
 
 @login_required
